@@ -1,5 +1,5 @@
-const { Op } = require("sequelize");
-const { Contract } = require("../model");
+const { Op } = require('sequelize');
+const { Contract } = require('../model');
 
 const userFilter = (userId) => ({
   [Op.or]: [
@@ -16,7 +16,7 @@ const contractService = {
   findInProgressContracts: (userId) =>
     Contract.findAll({
       where: {
-        status: "in_progress",
+        status: 'in_progress',
         ...userFilter(userId),
       },
     }),

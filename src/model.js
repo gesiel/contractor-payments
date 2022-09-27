@@ -1,8 +1,8 @@
-const Sequelize = require("sequelize");
+const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize({
-  dialect: "sqlite",
-  storage: "./database.sqlite3",
+  dialect: 'sqlite',
+  storage: './database.sqlite3',
 });
 
 class Profile extends Sequelize.Model {}
@@ -24,13 +24,13 @@ Profile.init(
       type: Sequelize.DECIMAL(12, 2),
     },
     type: {
-      type: Sequelize.ENUM("client", "contractor"),
+      type: Sequelize.ENUM('client', 'contractor'),
     },
   },
   {
     sequelize,
-    modelName: "Profile",
-  }
+    modelName: 'Profile',
+  },
 );
 
 class Contract extends Sequelize.Model {}
@@ -41,13 +41,13 @@ Contract.init(
       allowNull: false,
     },
     status: {
-      type: Sequelize.ENUM("new", "in_progress", "terminated"),
+      type: Sequelize.ENUM('new', 'in_progress', 'terminated'),
     },
   },
   {
     sequelize,
-    modelName: "Contract",
-  }
+    modelName: 'Contract',
+  },
 );
 
 class Job extends Sequelize.Model {}
@@ -71,14 +71,14 @@ Job.init(
   },
   {
     sequelize,
-    modelName: "Job",
-  }
+    modelName: 'Job',
+  },
 );
 
-Profile.hasMany(Contract, { as: "Contractor", foreignKey: "ContractorId" });
-Contract.belongsTo(Profile, { as: "Contractor" });
-Profile.hasMany(Contract, { as: "Client", foreignKey: "ClientId" });
-Contract.belongsTo(Profile, { as: "Client" });
+Profile.hasMany(Contract, { as: 'Contractor', foreignKey: 'ContractorId' });
+Contract.belongsTo(Profile, { as: 'Contractor' });
+Profile.hasMany(Contract, { as: 'Client', foreignKey: 'ClientId' });
+Contract.belongsTo(Profile, { as: 'Client' });
 Contract.hasMany(Job);
 Job.belongsTo(Contract);
 

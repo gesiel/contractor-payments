@@ -1,6 +1,6 @@
-const express = require("express");
-const { body, validationResult } = require("express-validator");
-const { getProfile } = require("../middleware/getProfile");
+const express = require('express');
+const { body, validationResult } = require('express-validator');
+const { getProfile } = require('../middleware/getProfile');
 
 const balanceRoutes = ({ deposit }) => {
   const router = express.Router();
@@ -10,8 +10,8 @@ const balanceRoutes = ({ deposit }) => {
    * Proccess a deposit operation in the client profile
    */
   router.post(
-    "/deposit",
-    body("amount").isNumeric().withMessage("Value must be Numeric"),
+    '/deposit',
+    body('amount').isNumeric().withMessage('Value must be Numeric'),
     async (req, res) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -25,7 +25,7 @@ const balanceRoutes = ({ deposit }) => {
       } catch (err) {
         res.status(400).send({ message: err.message });
       }
-    }
+    },
   );
 
   return router;

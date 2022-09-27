@@ -1,5 +1,5 @@
-const { Op } = require("sequelize");
-const { Job, Contract, Profile, sequelize } = require("../model");
+const { Op } = require('sequelize');
+const { Job, Contract, Profile, sequelize } = require('../model');
 
 const jobService = {
   findAllUnpaidJobs: (userId) =>
@@ -7,7 +7,7 @@ const jobService = {
       include: {
         model: Contract,
         where: {
-          status: "in_progress",
+          status: 'in_progress',
           [Op.or]: [
             {
               ContractorId: userId,
@@ -29,7 +29,7 @@ const jobService = {
         include: {
           model: Contract,
           where: {
-            status: "in_progress",
+            status: 'in_progress',
             ClientId: userId,
           },
         },
@@ -41,7 +41,7 @@ const jobService = {
         transaction,
       });
       if (!job) {
-        throw new Error("No unpaid job found");
+        throw new Error('No unpaid job found');
       }
 
       const client = await Profile.findOne({
@@ -55,7 +55,7 @@ const jobService = {
         throw new Error("Client's profile not found");
       }
       if (client.balance < job.price) {
-        throw new Error("Insufficient funds");
+        throw new Error('Insufficient funds');
       }
 
       const contractor = await Profile.findOne({

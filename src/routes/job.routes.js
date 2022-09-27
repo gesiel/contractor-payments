@@ -1,5 +1,5 @@
-const express = require("express");
-const { getProfile } = require("../middleware/getProfile");
+const express = require('express');
+const { getProfile } = require('../middleware/getProfile');
 
 const jobRoutes = ({ findAllUnpaidJobs, payJob }) => {
   const router = express.Router();
@@ -8,7 +8,7 @@ const jobRoutes = ({ findAllUnpaidJobs, payJob }) => {
   /**
    * @returns unpaid jobs for active contracts
    */
-  router.get("/unpaid", async (req, res) => {
+  router.get('/unpaid', async (req, res) => {
     const jobs = await findAllUnpaidJobs(req.profile.id);
     res.json({ jobs });
   });
@@ -16,7 +16,7 @@ const jobRoutes = ({ findAllUnpaidJobs, payJob }) => {
   /**
    * Client pays a job for a contractor
    */
-  router.post("/:jobId/pay", async (req, res) => {
+  router.post('/:jobId/pay', async (req, res) => {
     const { jobId } = req.params;
     try {
       await payJob(req.profile.id, jobId);

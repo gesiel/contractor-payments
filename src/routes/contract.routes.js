@@ -1,5 +1,5 @@
-const express = require("express");
-const { getProfile } = require("../middleware/getProfile");
+const express = require('express');
+const { getProfile } = require('../middleware/getProfile');
 
 const contractRoutes = ({ findInProgressContracts, findUserContractById }) => {
   const router = express.Router();
@@ -8,7 +8,7 @@ const contractRoutes = ({ findInProgressContracts, findUserContractById }) => {
   /**
    * @returns contract by id
    */
-  router.get("/:id", async (req, res) => {
+  router.get('/:id', async (req, res) => {
     const { id } = req.params;
     const contract = await findUserContractById(req.profile.id, id);
     if (!contract) return res.status(404).end();
@@ -18,7 +18,7 @@ const contractRoutes = ({ findInProgressContracts, findUserContractById }) => {
   /**
    * @returns non terminated contracts
    */
-  router.get("/", async (req, res) => {
+  router.get('/', async (req, res) => {
     const contracts = await findInProgressContracts(req.profile.id);
     res.json({ contracts });
   });
